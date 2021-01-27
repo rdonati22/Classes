@@ -21,7 +21,7 @@ public class NumberDivider {
             if (i%10 == 0){
                 return false;
             }
-            if (i%(i%10) != 0){
+            if (number % (i%10) != 0){
                 return false;
             }
         }
@@ -35,19 +35,6 @@ public class NumberDivider {
      *	@return an array containing the first num integers >= start
      *		that are number dividers
      **/
-//    public static int [] firstXNumberDividers(int start, int x)
-//    {
-//        int [] a = new int [x];
-//        int index = 0;
-//        for (int i = start; i < 150; i++){
-//            if (isNumberDivider(i)){
-//                a[index] = i;
-//                index++;
-//            }
-//        }
-//        return a;
-//    }
-
     public static int [] firstXNumberDividers(int start, int x)
     {
         int [] a = new int [x];
