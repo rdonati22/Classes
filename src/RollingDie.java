@@ -45,49 +45,47 @@ public class RollingDie {
 	Precondition:  values.length > 0
 	*/
 
-//    public int getBestRun(int[] values)
-//    {
-//        int len = values.length;
-//        int index = -1;
-//        int run = 0;
-//        for (int i = 0; i < len-1; i++){
-//            if (values[i] == values[i+1]){
-//                index = i;
-//            }
-//        }
-//        return index;
-//    }
-
     public int getBestRun(int[] values)
     {
         int len = values.length;
+        int currRun = 1;
+        int highRun = 1;
         int index = -1;
-        int currRun = 0;
+        int result = -1;
         for(int i = 0; i < len-1; i++){
             if (values[i] == values[i+1]){
                 currRun++;
-                index = i;
+                index = i+2-currRun;
             }
             else{
-                int highRun = currRun;
+                if (i==len-2){
+                    if (values[len-3] == values[len-2] && values[len-2] == values[len-1]){
+                        currRun++;
+                    }
+                }
+                if (currRun > highRun){
+                    highRun = currRun;
+                    result = index;
+                }
+                currRun = 1;
             }
         }
-        //if (values[len-3] == values[len-2] && values[len-2] == values[len-1]){
-          //  run++;
-        //}
-        //return index;
-        return currRun;
+        return result;
     }
 
     public static void main(String[] args) {
         RollingDie nc = new RollingDie();
 
-        //System.out.println(Arrays.toString(nc.getRolls(7)));
-
         for (int p = 0; p < 10; p++) {
             int[] tossArr = nc.getRolls(20);
-            for (int i = 0; i < 20; i++)
-                System.out.print(tossArr[i] + ",");
+            for (int i = 0; i < 20; i++) {
+                if (i == 19) {
+                    System.out.print(tossArr[19]);
+                }
+                else {
+                    System.out.print(tossArr[i] + ",");
+                }
+            }
             System.out.println();
 
             int x = nc.getBestRun(tossArr);
