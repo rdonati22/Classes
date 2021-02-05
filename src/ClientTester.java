@@ -29,140 +29,23 @@ public class ClientTester {
     //               by client
     // postcondition: list1 and list2 are not modified
 
-//    public static void prefixMerge(Client [] list1, Client [] list2, Client[] result){
-//        int len = result.length;
-//        for (int i = 0; i < len; i++){
-//            if (list1[i].compareClient(list2[i]) < 0){
-//                result [i] = list1[i];
-//            }
-//            else {
-//                result [i] = list2[i];
-//            }
-//        }
-//    }
-
-//    public static void prefixMerge(Client [] list1, Client [] list2, Client[] result){
-//        int len = result.length;
-//        int index1 = 0;
-//        int index2 = 0;
-//        for (int i = 0; i < len; i++) {
-//            for (int j = 0; j < len; j++){
-//                if (result)
-//            }
-//            if (list1[0].compareClient(list2[0]) < 0) {
-//                result[0] = list1[0];
-//            }
-//            if (list1[1].compareClient(list2[0]) < 0) {
-//                result[1] = list1[1];
-//            }
-//        }
-//    }
-
-//    public static void prefixMerge(Client [] list1, Client [] list2, Client[] result) {
-//        int len = result.length;
-//        boolean lessThan = true;
-//        for (int index = 0; index < len; index++) {
-//            for (int i = 0; i < len; i++) {
-//                if (list1[index].compareClient(list2[i]) > 0) {
-//                    lessThan = false;
-//                }
-//            }
-//            if (lessThan) {
-//                result[index] = list1[index];
-//            }
-//        }
-//    }
-
-//    public static void prefixMerge(Client [] list1, Client [] list2, Client[] result) {
-//        int len = result.length;
-//        int index1 = 0;
-//        int index2 = 0;
-//        int index3 = 0;
-//        boolean lessThan1 = true;
-//        boolean lessThan2 = true;
-//        for (int j = 0; j < len; j++){
-//            for (int i = 0; i < len; i++) {
-//                if (list1[index1].compareClient(list2[i]) > 0) {
-//                    lessThan1 = false;
-//                }
-//            }
-//            if (lessThan1) {
-//                result[index3] = list1[index1];
-//                index1++;
-//                index3++;
-//            }
-//            else {
-//                for (int i = 0; i < len; i++) {
-//                    if (list2[index2].compareClient(list1[i]) > 0) {
-//                        lessThan2 = false;
-//                    }
-//                }
-//                if (lessThan2) {
-//                    result[index3] = list2[index2];
-//                    index2++;
-//                    index3++;
-//                }
-//            }
-//        }
-//    }
-
-//    public static void prefixMerge(Client [] list1, Client [] list2, Client[] result) {
-//        int len = result.length;
-//        for (int i = 0; i < len; i++) {
-//            result[i] = list1[i];
-//        }
-//        //int k =0;
-//        for (int k = 0; k < list2.length; k++) {
-//            for (int j = 0; j < len; j++) {
-//                if (list2[k].compareClient(list1[j]) < 0) {
-//                    result[j] = list2[k];
-//                    for (int l = j + 1; l < len; l++) {
-//                        result[l] = result[l - 1];
-//                    }
-//                    j = len;
-//                }
-//            }
-//        }
-//    }
-
-//    public static void prefixMerge(Client [] list1, Client [] list2, Client[] result) {
-//        int len = result.length;
-//        for (int i = 0; i < len; i++) {
-//            result[i] = list1[i];
-//        }
-//        //int k =0;
-//        boolean resultContains = false;
-//        for (int k = 0; k < list2.length; k++) {
-//            for (int j = 0; j < len; j++) {
-//                if (list2[k] == result[j]) {
-//                    resultContains = true;
-//                }
-//            }
-//        }
-//        if (!resultContains){
-//
-//        }
-//    }
-
     public static void prefixMerge(Client [] list1, Client [] list2, Client[] result){
-        int len = result.length;
-        //int index = 0;
-        for (int i = 0; i < len; i++){
-            if (list1[i].compareClient(list2[i]) < 0){
-                result[i] = list1[i];
+        int index1 = 0;
+        int index2 = 0;
+        for (int resultIndex = 0; resultIndex < result.length; resultIndex++){
+            int x = list1[index1].compareClient(list2[index2]);
+            if (x < 0){
+                result[resultIndex] = list1[index1];
+                index1++;
             }
-            else{
-                result[i] = list2[i];
+            else if (x > 0){
+                result[resultIndex] = list2[index2];
+                index2++;
             }
-        }
-        for (int j = 0; j < len; j++) {
-            for (int k = 0; k < len; k++) {
-                if (list2[j].compareClient(list1[k]) != 0){
-                    result[k] = list2[j];
-                    for (int l = j + 1; l < len; l++) {
-                        result[l] = result[l - 1];
-                    }
-                }
+            else {
+                result[resultIndex] = list1[index1];
+                index1++;
+                index2++;
             }
         }
     }
@@ -181,7 +64,6 @@ public class ClientTester {
         Client [] list2 = {c2,c3,c5,c6,c7};
         Client [] list3 = {c3,c5,c6};
 
-
         Client [] result1 = new Client[5];
         prefixMerge(list1,list2,result1);
         System.out.println(Arrays.toString(result1));
@@ -193,6 +75,5 @@ public class ClientTester {
         Client [] result3 = new Client[3];
         prefixMerge(list3,list1,result3);
         System.out.println(Arrays.toString(result3));
-
     }
 }
